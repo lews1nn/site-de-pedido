@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Pedidos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="admin-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-chart-line"></i> Painel Administrativo
+            </div>
+            <a href="/" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Voltar ao Site
+            </a>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+        <header class="admin-header">
+            <h1>Gerenciamento de Pedidos</h1>
+            <button class="btn-refresh" onclick="carregarPedidos()">
+                <i class="fas fa-sync-alt"></i> Atualizar
+            </button>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon novo">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="countNovo">0</h3>
+                    <p>Novos Pedidos</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon processando">
+                    <i class="fas fa-spinner"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="countProcessando">0</h3>
+                    <p>Em Processamento</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon concluido">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="countConcluido">0</h3>
+                    <p>Concluídos</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon total">
+                    <i class="fas fa-list"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="countTotal">0</h3>
+                    <p>Total de Pedidos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filtrarPedidos('todos')">Todos</button>
+            <button class="filter-btn" onclick="filtrarPedidos('Novo')">Novos</button>
+            <button class="filter-btn" onclick="filtrarPedidos('Processando')">Processando</button>
+            <button class="filter-btn" onclick="filtrarPedidos('Concluído')">Concluídos</button>
+        </div>
+
+        <div class="orders-list" id="ordersList">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i> Carregando pedidos...
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='admin.js') }}"></script>
+</body>
+</html>

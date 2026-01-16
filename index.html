@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BasketStore - Equipamentos de Basquete</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-basketball-ball"></i> BasketStore
+            </div>
+            <div class="nav-links">
+                <a href="#produtos">Produtos</a>
+                <a href="admin.html" class="admin-link"><i class="fas fa-cog"></i> Admin</a>
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-basketball-ball"></i>
+            </div>
+            <h1>BasketStore</h1>
+            <p class="hero-subtitle">Equipamentos de Basquete Premium</p>
+            <p class="hero-description">Tênis, Bolas e Camisetas das melhores marcas</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Entrega Rápida</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Produtos Originais</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-headset"></i>
+                    <span>Suporte 24/7</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="menu-section" id="produtos">
+            <div class="section-header">
+                <h2><i class="fas fa-store"></i> Nossos Produtos</h2>
+                <p class="section-subtitle">Encontre tudo que precisa para o basquete</p>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Produtos serão inseridos aqui via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Carrinho de Compras -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Seu Carrinho</h2>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Seu carrinho está vazio</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: R$ <span id="cartTotal">0.00</span></strong>
+            </div>
+            <button class="btn-checkout" onclick="openCheckout()" disabled>
+                Finalizar Pedido
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Checkout -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Finalizar Pedido</h2>
+                <button class="close-modal" onclick="closeCheckout()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div style="background: #fff3cd; border: 1px solid #ffc107; padding: 1rem; margin: 1rem; border-radius: 8px; color: #856404;">
+                <strong><i class="fas fa-info-circle"></i> Aviso:</strong> Esta é uma versão de demonstração. 
+                Os pedidos não serão salvos sem o servidor Flask rodando. 
+                Para usar a versão completa, execute <code>python app.py</code> localmente.
+            </div>
+            <form id="checkoutForm" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label for="cliente">Nome Completo *</label>
+                    <input type="text" id="cliente" name="cliente" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone *</label>
+                    <input type="tel" id="telefone" name="telefone" required placeholder="(11) 99999-9999">
+                </div>
+                <div class="form-group">
+                    <label for="endereco">Endereço de Entrega *</label>
+                    <textarea id="endereco" name="endereco" rows="3" required placeholder="Rua, número, bairro, cidade"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="observacoes">Observações (opcional)</label>
+                    <textarea id="observacoes" name="observacoes" rows="2" placeholder="Alguma observação sobre o pedido?"></textarea>
+                </div>
+                <div class="order-summary">
+                    <h3>Resumo do Pedido</h3>
+                    <div id="orderSummary"></div>
+                    <div class="order-total">
+                        <strong>Total: R$ <span id="orderTotal">0.00</span></strong>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Enviar Pedido (Demo)
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Sucesso -->
+    <div class="modal" id="successModal">
+        <div class="modal-content modal-success">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Pedido de Demonstração Enviado!</h2>
+            <p>Este é um site de demonstração. O pedido não foi salvo.</p>
+            <p class="order-id">ID do Pedido (simulado): <strong id="successOrderId"></strong></p>
+            <button class="btn-ok" onclick="closeSuccessModal()">OK</button>
+        </div>
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
+</html>
