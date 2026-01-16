@@ -31,8 +31,7 @@ python app.py
 ```
 
 2. **Acesse o site:**
-   - Cliente: http://localhost:5000
-   - Admin: http://localhost:5000/admin
+   - Cliente: https://lews1nn.github.io/site-de-pedido/
 
 3. **Faça um pedido:**
    - Adicione produtos ao carrinho
@@ -134,3 +133,4 @@ Este projeto é livre para uso educacional.
 ---
 
 Desenvolvido para aprendizado! 🎓
+
