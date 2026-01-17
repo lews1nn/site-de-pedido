@@ -3,7 +3,7 @@ const produtos = [
     {
         id: 1,
         nome: "Tênis Nike Air Jordan",
-        descricao: "Tênis de basquete premium, tecnologia Air Max, tamanhos 38-45",
+        descricao: "Tênis de basquete com tecnologia Air Max, tamanhos 38-45",
         preco: 899.90,
         icone: "👟",
         categoria: "tênis",
@@ -355,3 +355,4 @@ document.getElementById('successModal').addEventListener('click', (e) => {
         closeSuccessModal();
     }
 });
+
