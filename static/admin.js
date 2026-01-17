@@ -29,7 +29,7 @@ async function carregarPedidos() {
         document.getElementById('ordersList').innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-info-circle" style="font-size: 3rem; color: #6b7280; margin-bottom: 1rem;"></i>
-                <h3 style="margin-bottom: 0.5rem;">Modo Demonstração</h3>
+                <h3 style="margin-bottom: 0.5rem;">Indisponivel</h3>
                 <p>O servidor Flask não está disponível. Os pedidos só podem ser visualizados quando o servidor estiver rodando.</p>
                 <p style="margin-top: 1rem; color: #6b7280; font-size: 0.9rem;">
                     Para ver os pedidos, execute <code style="background: #f3f4f6; padding: 0.2rem 0.5rem; border-radius: 4px;">python app.py</code> localmente.
@@ -201,3 +201,4 @@ async function atualizarStatus(pedidoId, novoStatus) {
         console.error(error);
     }
 }
+
