@@ -78,7 +78,7 @@ const produtos = [
     {
         id: 10,
         nome: "Camiseta NBA Celtics",
-        descricao: "Camiseta oficial, conforto premium, tamanhos P/M/G/GG",
+        descricao: "Camiseta oficial, mais confortável, tamanhos P/M/G/GG",
         preco: 249.90,
         icone: "👕",
         categoria: "camisetas"
@@ -355,5 +355,6 @@ document.getElementById('successModal').addEventListener('click', (e) => {
         closeSuccessModal();
     }
 });
+
 
 
