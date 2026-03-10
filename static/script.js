@@ -1,4 +1,3 @@
-// Produtos do catálogo - Itens de Basquete
 const produtos = [
     {
         id: 1,
@@ -102,16 +101,13 @@ const produtos = [
     }
 ];
 
-// Carrinho de compras
 let carrinho = [];
 
-// Inicialização
 document.addEventListener('DOMContentLoaded', () => {
     renderizarProdutos();
     atualizarCarrinho();
 });
 
-// Renderizar produtos na página
 function renderizarProdutos() {
     const grid = document.getElementById('productsGrid');
     grid.innerHTML = produtos.map(produto => `
@@ -135,7 +131,6 @@ function renderizarProdutos() {
     `).join('');
 }
 
-// Adicionar produto ao carrinho
 function adicionarAoCarrinho(produtoId) {
     const produto = produtos.find(p => p.id === produtoId);
     const itemExistente = carrinho.find(item => item.id === produtoId);
@@ -153,13 +148,11 @@ function adicionarAoCarrinho(produtoId) {
     mostrarNotificacao(`${produto.nome} adicionado ao carrinho!`);
 }
 
-// Remover item do carrinho
 function removerDoCarrinho(produtoId) {
     carrinho = carrinho.filter(item => item.id !== produtoId);
     atualizarCarrinho();
 }
 
-// Atualizar quantidade
 function atualizarQuantidade(produtoId, delta) {
     const item = carrinho.find(item => item.id === produtoId);
     if (item) {
@@ -172,18 +165,15 @@ function atualizarQuantidade(produtoId, delta) {
     }
 }
 
-// Atualizar interface do carrinho
 function atualizarCarrinho() {
     const cartCount = document.getElementById('cartCount');
     const cartItems = document.getElementById('cartItems');
     const cartTotal = document.getElementById('cartTotal');
     const btnCheckout = document.querySelector('.btn-checkout');
 
-    // Atualizar contador
     const totalItens = carrinho.reduce((sum, item) => sum + item.quantidade, 0);
     cartCount.textContent = totalItens;
 
-    // Atualizar lista de itens
     if (carrinho.length === 0) {
         cartItems.innerHTML = '<p class="empty-cart">Seu carrinho está vazio</p>';
         btnCheckout.disabled = true;
@@ -209,24 +199,20 @@ function atualizarCarrinho() {
         btnCheckout.disabled = false;
     }
 
-    // Atualizar total
     const total = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
     cartTotal.textContent = total.toFixed(2);
 }
 
-// Toggle carrinho
 function toggleCart() {
     const sidebar = document.getElementById('cartSidebar');
     sidebar.classList.toggle('open');
 }
 
-// Abrir modal de checkout
 function openCheckout() {
     const modal = document.getElementById('checkoutModal');
     const summary = document.getElementById('orderSummary');
     const total = document.getElementById('orderTotal');
 
-    // Atualizar resumo do pedido
     summary.innerHTML = carrinho.map(item => `
         <div class="order-summary-item">
             <span>${item.nome} x${item.quantidade}</span>
@@ -240,13 +226,11 @@ function openCheckout() {
     modal.classList.add('show');
 }
 
-// Fechar modal de checkout
 function closeCheckout() {
     const modal = document.getElementById('checkoutModal');
     modal.classList.remove('show');
 }
 
-// Submeter pedido
 async function submitOrder(event) {
     event.preventDefault();
 
@@ -277,35 +261,28 @@ async function submitOrder(event) {
         const result = await response.json();
 
         if (result.success) {
-            // Mostrar modal de sucesso
             document.getElementById('successOrderId').textContent = result.pedido_id;
             document.getElementById('checkoutModal').classList.remove('show');
             document.getElementById('successModal').classList.add('show');
 
-            // Limpar carrinho
             carrinho = [];
             atualizarCarrinho();
             toggleCart();
 
-            // Limpar formulário
             event.target.reset();
         } else {
             alert('Erro ao enviar pedido: ' + result.error);
         }
     } catch (error) {
-        // Se o servidor não estiver disponível (modo demonstração)
-        // Simular sucesso para demonstração
         const pedidoIdSimulado = Math.floor(Math.random() * 10000) + 1;
         document.getElementById('successOrderId').textContent = pedidoIdSimulado;
         document.getElementById('checkoutModal').classList.remove('show');
         document.getElementById('successModal').classList.add('show');
 
-        // Limpar carrinho
         carrinho = [];
         atualizarCarrinho();
         toggleCart();
 
-        // Limpar formulário
         event.target.reset();
         
         console.log('Modo demonstração: Pedido não foi salvo (servidor não disponível)');
@@ -313,14 +290,11 @@ async function submitOrder(event) {
     }
 }
 
-// Fechar modal de sucesso
 function closeSuccessModal() {
     document.getElementById('successModal').classList.remove('show');
 }
 
-// Notificação simples
 function mostrarNotificacao(mensagem) {
-    // Criar elemento de notificação
     const notification = document.createElement('div');
     notification.style.cssText = `
         position: fixed;
@@ -343,7 +317,6 @@ function mostrarNotificacao(mensagem) {
     }, 3000);
 }
 
-// Fechar modais ao clicar fora
 document.getElementById('checkoutModal').addEventListener('click', (e) => {
     if (e.target.id === 'checkoutModal') {
         closeCheckout();
@@ -355,6 +328,7 @@ document.getElementById('successModal').addEventListener('click', (e) => {
         closeSuccessModal();
     }
 });
+
 
 
 
