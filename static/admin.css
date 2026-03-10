@@ -24,7 +24,6 @@ body {
     line-height: 1.6;
 }
 
-/* Navbar */
 .admin-navbar {
     background: white;
     box-shadow: var(--shadow);
@@ -62,7 +61,6 @@ body {
     background: var(--secondary-color);
 }
 
-/* Container */
 .admin-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -98,7 +96,6 @@ body {
     background: var(--secondary-color);
 }
 
-/* Stats Grid */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -153,7 +150,6 @@ body {
     font-size: 0.9rem;
 }
 
-/* Filters */
 .filters {
     display: flex;
     gap: 1rem;
@@ -182,7 +178,6 @@ body {
     border-color: var(--primary-color);
 }
 
-/* Orders List */
 .orders-list {
     display: flex;
     flex-direction: column;
@@ -345,7 +340,6 @@ body {
     color: var(--border-color);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .admin-header {
         flex-direction: column;
@@ -370,3 +364,4 @@ body {
         width: 100%;
     }
 }
+
