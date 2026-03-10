@@ -1,19 +1,15 @@
 let todosPedidos = [];
 let filtroAtual = 'todos';
 
-// Carregar pedidos ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     carregarPedidos();
-    // Atualizar a cada 5 segundos
     setInterval(carregarPedidos, 5000);
 });
 
-// Carregar pedidos do servidor
 async function carregarPedidos() {
     try {
         const response = await fetch('/api/pedidos');
         
-        // Verificar se a resposta foi bem-sucedida
         if (!response.ok) {
             throw new Error('Servidor não disponível');
         }
@@ -23,7 +19,6 @@ async function carregarPedidos() {
         renderizarPedidos();
     } catch (error) {
         console.error('Erro ao carregar pedidos:', error);
-        // Modo demonstração: mostrar mensagem amigável
         todosPedidos = [];
         atualizarEstatisticas();
         document.getElementById('ordersList').innerHTML = `
@@ -39,7 +34,6 @@ async function carregarPedidos() {
     }
 }
 
-// Atualizar estatísticas
 function atualizarEstatisticas() {
     const countNovo = todosPedidos.filter(p => p.status === 'Novo').length;
     const countProcessando = todosPedidos.filter(p => p.status === 'Processando').length;
@@ -52,11 +46,9 @@ function atualizarEstatisticas() {
     document.getElementById('countTotal').textContent = countTotal;
 }
 
-// Filtrar pedidos
 function filtrarPedidos(status) {
     filtroAtual = status;
     
-    // Atualizar botões de filtro
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
     });
@@ -65,11 +57,9 @@ function filtrarPedidos(status) {
     renderizarPedidos();
 }
 
-// Renderizar lista de pedidos
 function renderizarPedidos() {
     const ordersList = document.getElementById('ordersList');
     
-    // Filtrar pedidos
     let pedidosFiltrados = todosPedidos;
     if (filtroAtual !== 'todos') {
         pedidosFiltrados = todosPedidos.filter(p => p.status === filtroAtual);
@@ -154,7 +144,6 @@ function renderizarPedidos() {
     `).join('');
 }
 
-// Atualizar status do pedido
 async function atualizarStatus(pedidoId, novoStatus) {
     if (!confirm(`Deseja realmente alterar o status deste pedido para "${novoStatus}"?`)) {
         return;
@@ -169,7 +158,6 @@ async function atualizarStatus(pedidoId, novoStatus) {
             body: JSON.stringify({ status: novoStatus })
         });
         
-        // Verificar se a resposta foi bem-sucedida
         if (!response.ok) {
             throw new Error('Servidor não disponível');
         }
@@ -177,7 +165,6 @@ async function atualizarStatus(pedidoId, novoStatus) {
         const result = await response.json();
         
         if (result.success) {
-            // Atualizar localmente
             const pedido = todosPedidos.find(p => p.id === pedidoId);
             if (pedido) {
                 pedido.status = novoStatus;
@@ -188,7 +175,6 @@ async function atualizarStatus(pedidoId, novoStatus) {
             alert('Erro ao atualizar status: ' + result.error);
         }
     } catch (error) {
-        // Modo demonstração: atualizar apenas localmente (não salva no servidor)
         const pedido = todosPedidos.find(p => p.id === pedidoId);
         if (pedido) {
             pedido.status = novoStatus;
@@ -201,4 +187,5 @@ async function atualizarStatus(pedidoId, novoStatus) {
         console.error(error);
     }
 }
+
 
