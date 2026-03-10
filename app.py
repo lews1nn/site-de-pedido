@@ -5,10 +5,8 @@ import os
 
 app = Flask(__name__)
 
-# Arquivo para armazenar pedidos
 PEDIDOS_FILE = 'pedidos.json'
 
-# Inicializar arquivo de pedidos se não existir
 if not os.path.exists(PEDIDOS_FILE):
     with open(PEDIDOS_FILE, 'w', encoding='utf-8') as f:
         json.dump([], f)
@@ -44,7 +42,6 @@ def criar_pedido():
     try:
         dados = request.json
         
-        # Criar objeto do pedido
         pedido = {
             'id': len(carregar_pedidos()) + 1,
             'cliente': dados.get('cliente', 'Cliente Anônimo'),
@@ -57,10 +54,8 @@ def criar_pedido():
             'data': datetime.now().strftime('%d/%m/%Y %H:%M:%S')
         }
         
-        # Salvar pedido
         salvar_pedido(pedido)
         
-        # Imprimir no console (para você ver os pedidos)
         print("\n" + "="*50)
         print("NOVO PEDIDO RECEBIDO!")
         print("="*50)
@@ -86,7 +81,6 @@ def criar_pedido():
 def listar_pedidos():
     """Endpoint para listar todos os pedidos"""
     pedidos = carregar_pedidos()
-    # Ordenar por data (mais recentes primeiro)
     pedidos.reverse()
     return jsonify(pedidos)
 
@@ -119,3 +113,4 @@ if __name__ == '__main__':
     print("Admin: http://localhost:5000/admin")
     print("="*50 + "\n")
     app.run(debug=True, host='0.0.0.0', port=5000)
+
